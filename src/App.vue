@@ -1,26 +1,59 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
-
-<script>
+<script lang="ts">
+import {defineComponent, ref} from "vue";
 import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
+export default defineComponent({
   components: {
     HelloWorld
+  },
+  setup() {
+    const msg = ref('You did it!')
+
+    return {
+      msg
+    }
   }
-}
+})
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<template>
+  <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  </header>
+
+  <main>
+    <div class="wrapper">
+      <HelloWorld v-model:msg="msg" />
+    </div>
+    <h1>{{ msg }}</h1>
+  </main>
+</template>
+
+<style scoped>
+header {
+  line-height: 1.5;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
 }
 </style>
